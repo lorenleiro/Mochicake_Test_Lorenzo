@@ -15,6 +15,12 @@ public class PaperInputController : MonoBehaviour
     [SerializeField]
     private float maxThrowAngle = 30.0f;
 
+    [SerializeField] 
+    private float maxForceCompensation = 1.2f;
+
+    [SerializeField]
+    private float minDragDistance= 0.5f;
+
     private GameInput gameInput;
     private PaperController paperController;
     private Camera mainCamera;
@@ -60,21 +66,26 @@ public class PaperInputController : MonoBehaviour
         Vector2 mouseEnd = Mouse.current.position.ReadValue();
         Vector2 drag = mouseEnd - (Vector2)throwStartPos;
 
-        // Usamos el forward del papel como base y solo desviamos en horizontal
+        if(drag.sqrMagnitude < minDragDistance * minDragDistance)
+        {
+            return;
+        }
+
         Vector3 forward = paperController.transform.forward;
         Vector3 right = paperController.transform.right;
 
-        Vector3 horizontalDirection =
-            (forward + right * drag.x * 0.01f).normalized;
+        Vector3 horizontalDirection = (forward + right * drag.x * 0.01f).normalized;
 
+        // Compensacion antes del clamp con la direccion real del raton
+        float angle = Vector3.Angle(forward, horizontalDirection);
+        float forceCompensation = Mathf.Clamp(1f / Mathf.Cos(angle * Mathf.Deg2Rad), 1f, maxForceCompensation);
+
+        // Clamp despues
         horizontalDirection = ClampDirection(horizontalDirection);
-
-        Vector3 finalForce =
-            horizontalDirection * throwForce +
-            Vector3.up * throwForceUpwards;
+        float compensatedForce = throwForce * forceCompensation;
+        Vector3 finalForce = horizontalDirection * compensatedForce + Vector3.up * throwForceUpwards;
 
         paperController.Launch(finalForce);
-
     }
 
     private Vector3 ClampDirection(Vector3 direction)

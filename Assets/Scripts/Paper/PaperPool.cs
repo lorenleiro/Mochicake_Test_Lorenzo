@@ -12,6 +12,7 @@ public class PaperPool : GenericPool<PaperController>
         newPaper.Body.velocity = Vector3.zero;
         newPaper.Body.angularVelocity = Vector3.zero;
         newPaper.Body.useGravity = false;
+        newPaper.Body.drag = 0.0f;
         newPaper.Body.isKinematic = true;
         newPaper.RegisterCollisions = true;
         newPaper.Scored = false;

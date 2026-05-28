@@ -9,7 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 783df409355057f40ada4356bbb6ca58, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c3177a582f9e124396071fef3fa2540, type: 3}
   m_Name: GameSettingsData
   m_EditorClassIdentifier: 
   Gravity: {x: 0, y: -3, z: 1}
+  GameLevels:
+  - LevelName: Normal Day
+    LevelPrefab: {fileID: 39499774846504704, guid: ff632f0cba01879479669f553b74ed7d,
+      type: 3}
+  - LevelName: Day Before Deadline
+    LevelPrefab: {fileID: 3078229345369130639, guid: cf7325527a339164492ea651824dafb9,
+      type: 3}
+  - LevelName: Chilling
+    LevelPrefab: {fileID: 1118567230917221704, guid: 9175c86577838be4c84d1478332b0e28,
+      type: 3}

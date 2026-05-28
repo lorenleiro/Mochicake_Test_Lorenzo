@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PaperManager : MonoBehaviour
 {
+    public Action<PaperController> OnPaperSpawned { get; set; }
+    public Action OnPaperScored{ get; set; }
+    public Action OnPaperFailScore{ get; set; }
     public PaperController CurrentPaper { get { return currentPaper; } }
 
     [SerializeField]
@@ -17,7 +21,7 @@ public class PaperManager : MonoBehaviour
 
     private void Start()
     {
-        InitializeGame();
+        GameManager.Instance.OnGameStart += RequestPaper;
     }
 
     private void OnDestroy()
@@ -35,6 +39,11 @@ public class PaperManager : MonoBehaviour
             if (currentPaper.Scored)
             {
                 paperPool.Release(currentPaper);
+                OnPaperScored?.Invoke();
+            }
+            else
+            {
+                OnPaperFailScore?.Invoke();
             }
         }
 
@@ -42,12 +51,7 @@ public class PaperManager : MonoBehaviour
         currentPaper.InitializePaper(binController);
         currentPaper.OnThrowFinished += RequestPaper;
         currentPaper.OnPaperOutsideRange += Dispose;
-        fanController.SetPaper(currentPaper);
-    }
-
-    private void InitializeGame()
-    {
-        RequestPaper();
+        OnPaperSpawned?.Invoke(currentPaper);
     }
 
     private void Dispose()
@@ -56,5 +60,7 @@ public class PaperManager : MonoBehaviour
         {
             paperPool.Release(currentPaper);
         }
+
+        GameManager.Instance.OnGameStart -= RequestPaper;
     }
 }

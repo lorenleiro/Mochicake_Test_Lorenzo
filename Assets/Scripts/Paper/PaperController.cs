@@ -7,6 +7,7 @@ public class PaperController : MonoBehaviour
     public Action OnThrowFinished { get; set; }
     public Action OnPaperOutsideRange { get; set; }
     public Rigidbody Body { get; private set; }
+    public Vector3 LaunchDirection { get; private set; }
 
     /// <summary>
     /// Tells if this paper can receive collision callbacks.
@@ -29,7 +30,8 @@ public class PaperController : MonoBehaviour
     [SerializeField]
     private float launchRotationForce = 5.0f;
 
-
+    [SerializeField]
+    private float dragOnTouch = 1.0f;
     [SerializeField]
     private float upwardForce = 5.0f;
 
@@ -77,6 +79,7 @@ public class PaperController : MonoBehaviour
 
     public void Launch(Vector3 force)
     {
+        LaunchDirection = force.normalized;
         Body.isKinematic = false;
         Body.useGravity = true;
         Body.AddForce(force, ForceMode.Impulse);
@@ -86,6 +89,11 @@ public class PaperController : MonoBehaviour
 
     private void StopMove()
     {
+        if(Body.drag == 0.0f)
+        {
+            Body.drag = dragOnTouch;
+        }
+
         Body.velocity = Vector3.MoveTowards(Body.velocity, Vector3.zero, slowDownThreshold * Time.fixedDeltaTime);
         Body.angularVelocity = Vector3.MoveTowards(Body.angularVelocity, Vector3.zero, slowDownThreshold * Time.fixedDeltaTime);
 
@@ -94,7 +102,6 @@ public class PaperController : MonoBehaviour
             Body.velocity = Vector3.zero;
             Body.angularVelocity = Vector3.zero;
             Body.Sleep();
-            //Body.isKinematic = true;
         }
     }
 

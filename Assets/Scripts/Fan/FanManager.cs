@@ -1,18 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FanManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Action<FanController> OnFanUpdated { get; set; }
+    public FanController FanController { get { return fanController; } }
+
+    [SerializeField]
+    private FanController fanController;
+
+    private void Start()
     {
-        
+        GameManager.Instance.OnPaperSpawned += PaperSpawned;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        GameManager.Instance.OnPaperSpawned -= PaperSpawned;
+    }
+
+    private void PaperSpawned(PaperController paperController)
+    {
+        fanController.SetPaper(paperController);
+        OnFanUpdated?.Invoke(fanController);
     }
 }

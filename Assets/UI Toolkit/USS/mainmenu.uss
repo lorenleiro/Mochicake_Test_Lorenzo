@@ -1,0 +1,43 @@
+.main-menu-button {
+    width: 30%;
+    margin-top: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    font-size: 60px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    transition-duration: 0.2s;
+    border-left-color: rgb(0, 45, 133);
+    border-right-color: rgb(0, 45, 133);
+    border-top-color: rgb(0, 45, 133);
+    border-bottom-color: rgb(0, 45, 133);
+    border-top-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 6px;
+    background-color: rgb(140, 201, 255);
+}
+
+.main-menu-button:hover {
+    width: 30%;
+    margin-top: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    font-size: 60px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    transition-duration: 0.2s;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 6px;
+    background-color: rgb(0, 136, 255);
+}
