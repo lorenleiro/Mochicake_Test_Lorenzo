@@ -106,6 +106,7 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     private void ResetScore()
     {
+        RewardPoints = 0;
         CurrentScore = 0;
         Score = 0;
         Multiplier = 1;
