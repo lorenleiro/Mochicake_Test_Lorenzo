@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -11,6 +9,9 @@ public class CameraManager : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera menuCamera;
 
+    /// <summary>
+    /// Transitions to the game camera.
+    /// </summary>
     public void TransitionGameCamera()
     {
         menuCamera.Priority = 0;

@@ -3,8 +3,9 @@
     <ui:VisualElement style="width: 100%; height: 100%; font-size: 80px; color: rgb(255, 255, 255); -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(142, 112, 46); -unity-text-align: upper-center;">
         <ui:VisualElement style="height: 10%;" />
         <ui:VisualElement>
-            <ui:Label tabindex="-1" text="PAPER TOSS" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold;" />
-            <ui:Label tabindex="-1" text="TURBO REMAKE" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 40px; -unity-font-style: italic;" />
+            <ui:Label tabindex="-1" text="PAPER TOSS" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold; font-size: 130px; -unity-text-outline-width: 4px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            <ui:Label tabindex="-1" text="TURBO REMAKE" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 80px; -unity-font-style: italic; -unity-text-outline-color: rgb(255, 175, 0);" />
+            <ui:Label tabindex="-1" text="by Lorenzo" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 100px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 40px; -unity-font-style: italic; -unity-text-outline-color: rgb(255, 175, 0);" />
         </ui:VisualElement>
         <ui:VisualElement style="margin-top: 20%; flex-direction: column; align-items: center; justify-content: center;">
             <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="play_button" class="main-menu-button" />

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -13,6 +11,9 @@ public class GameManager : Singleton<GameManager>
     public Action OnPaperFailScore { get; set; }
 
     [Header("Game Managers")]
+
+    [SerializeField]
+    private TrashController trashController;
 
     [SerializeField]
     private FanManager fanManager;
@@ -55,6 +56,22 @@ public class GameManager : Singleton<GameManager>
     {
         cameraManager.TransitionGameCamera();
         OnGameStart?.Invoke();
+    }
+
+    /// <summary>
+    /// Makes the trash bigger for one shoot.
+    /// </summary>
+    public void UpgradeTrash()
+    {
+        trashController.Upgrade();
+    }
+
+    /// <summary>
+    /// Disables de fan for one shoot.
+    /// </summary>
+    public void DisableFan()
+    {
+        fanManager.DisableFan();
     }
 
     public void ExitGame() => Application.Quit();

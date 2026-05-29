@@ -5,5 +5,6 @@ using UnityEngine;
 public class LevelData
 {
     public string LevelName;
+    public AudioClip AmbienceClip;
     public GameObject LevelPrefab;
 }

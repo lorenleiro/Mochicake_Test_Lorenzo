@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -8,11 +6,12 @@ public class LevelManager : MonoBehaviour
     private GameSettingsData gameSettingsData;
 
     [SerializeField]
+    [Tooltip("Current loaded visual level.")]
     private GameObject level;
 
     [SerializeField]
+    [Tooltip("Point where the level will be loaded.")]
     private Transform levelPivot;
-
 
     private void Start()
     {
@@ -24,6 +23,9 @@ public class LevelManager : MonoBehaviour
         gameSettingsData.OnLevelSelected -= ChangeLevel;
     }
 
+    /// <summary>
+    /// Recreated the level visual using the one selected on the Game Settings.
+    /// </summary>
     private void ChangeLevel()
     {
         if (level != null)

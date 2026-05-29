@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 public class GameplayUI : BaseUI
 {
     private VisualElement scoreBar;
     private VisualElement settingsContainer;
-    private VisualElement skinVisual;
     private Label scoreText;
     private Label bestScoreText;
     private Label totalPointsText;
@@ -17,6 +13,8 @@ public class GameplayUI : BaseUI
     private Button nextLevelButton;
     private Button changeSkinButton;
     private Button closeSettingsButton;
+    private Button upgradeTrashButton;
+    private Button disableFanButton;
     private Label levelText;
     private GameSettingsData gameSettingsData;
     private int currentLevel;
@@ -27,10 +25,9 @@ public class GameplayUI : BaseUI
 
         scoreBar = root.Q<VisualElement>("score_bar");
         settingsContainer = root.Q<VisualElement>("settings_container");
-        skinVisual = root.Q<VisualElement>("skin_visual");
         scoreText = root.Q<Label>("score_text");
         bestScoreText = root.Q<Label>("best_score_text");
-        levelText= root.Q<Label>("level_text");
+        levelText = root.Q<Label>("level_text");
         totalPointsText = root.Q<Label>("total_points_text");
         multiplierText = root.Q<Label>("multiplier_text");
         settingsButton = root.Q<Button>("settings_button");
@@ -38,11 +35,16 @@ public class GameplayUI : BaseUI
         previousLevelButton = root.Q<Button>("previous_level_button");
         nextLevelButton = root.Q<Button>("next_level_button");
         closeSettingsButton = root.Q<Button>("close_settings");
+        upgradeTrashButton = root.Q<Button>("upgrade_trash_button");
+        disableFanButton = root.Q<Button>("disable_fan_button");
 
         settingsButton.clicked += ShowSettings;
         closeSettingsButton.clicked += HideSettings;
         nextLevelButton.clicked += NextLevel;
         previousLevelButton.clicked += PreviousLevel;
+        upgradeTrashButton.clicked += UpgradeTrash;
+        disableFanButton.clicked += DisableFan;
+        changeSkinButton.clicked += ChangeSkin;
 
         GameManager.Instance.OnScoreUpdated += UpdateScore;
     }
@@ -54,6 +56,9 @@ public class GameplayUI : BaseUI
         closeSettingsButton.clicked -= HideSettings;
         nextLevelButton.clicked -= NextLevel;
         previousLevelButton.clicked -= PreviousLevel;
+        upgradeTrashButton.clicked -= UpgradeTrash;
+        disableFanButton.clicked -= DisableFan;
+        changeSkinButton.clicked -= ChangeSkin;
     }
 
     private void UpdateScore(ScoreManager scoreManager)
@@ -101,7 +106,7 @@ public class GameplayUI : BaseUI
     {
         currentLevel--;
 
-        if (currentLevel <= 0)
+        if (currentLevel < 0)
         {
             currentLevel = gameSettingsData.GameLevels.Length - 1;
         }
@@ -109,9 +114,24 @@ public class GameplayUI : BaseUI
         SetLevel(currentLevel);
     }
 
+    private void ChangeSkin()
+    {
+        gameSettingsData.SetCurrentPaperVisual();
+    }
+
     private void SetLevel(int level)
     {
         levelText.text = gameSettingsData.GameLevels[level].LevelName;
         gameSettingsData.SetCurrentLevel(level);
+    }
+
+    private void UpgradeTrash()
+    {
+        GameManager.Instance.UpgradeTrash();
+    }
+
+    private void DisableFan()
+    {
+        GameManager.Instance.DisableFan();
     }
 }

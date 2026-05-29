@@ -7,30 +7,32 @@ public class PaperInputController : MonoBehaviour
     private PaperManager paperManager;
 
     [SerializeField]
+    [Tooltip("Amount of force used to push the paper forward.")]
     private float throwForce = 2.0f;
 
     [SerializeField]
+    [Tooltip("Amount of force used to push the paper upwards.")]
     private float throwForceUpwards = 0.5f;
 
     [SerializeField]
+    [Tooltip("Maximum angle the player can throw.")]
     private float maxThrowAngle = 30.0f;
 
-    [SerializeField] 
+    [SerializeField]
+    [Tooltip("The greater the throw angle, the greater the force to compensate the extra distance the paper needs to travel.")]
     private float maxForceCompensation = 1.2f;
 
     [SerializeField]
-    private float minDragDistance= 0.5f;
+    [Tooltip("Minimum vector distance needed to throw the paper.")]
+    private float minDragDistance = 0.5f;
 
     private GameInput gameInput;
     private PaperController paperController;
-    private Camera mainCamera;
     private Vector3 throwStartPos;
-    private Vector3 throwEndPos;
 
     private void Awake()
     {
         RegisterInput();
-        mainCamera = Camera.main;
     }
 
     private void OnDestroy()
@@ -61,26 +63,27 @@ public class PaperInputController : MonoBehaviour
     private void ThrowPaper(InputAction.CallbackContext ctx)
     {
         paperController = paperManager.CurrentPaper;
-        if (paperController == null) return;
+
+        if (paperController == null)
+        {
+            return;
+        }
 
         Vector2 mouseEnd = Mouse.current.position.ReadValue();
         Vector2 drag = mouseEnd - (Vector2)throwStartPos;
 
-        if(drag.sqrMagnitude < minDragDistance * minDragDistance)
+        if (drag.sqrMagnitude < minDragDistance * minDragDistance)
         {
             return;
         }
 
         Vector3 forward = paperController.transform.forward;
         Vector3 right = paperController.transform.right;
-
         Vector3 horizontalDirection = (forward + right * drag.x * 0.01f).normalized;
 
-        // Compensacion antes del clamp con la direccion real del raton
         float angle = Vector3.Angle(forward, horizontalDirection);
         float forceCompensation = Mathf.Clamp(1f / Mathf.Cos(angle * Mathf.Deg2Rad), 1f, maxForceCompensation);
 
-        // Clamp despues
         horizontalDirection = ClampDirection(horizontalDirection);
         float compensatedForce = throwForce * forceCompensation;
         Vector3 finalForce = horizontalDirection * compensatedForce + Vector3.up * throwForceUpwards;
@@ -88,18 +91,25 @@ public class PaperInputController : MonoBehaviour
         paperController.Launch(finalForce);
     }
 
+    /// <summary>
+    /// Clamps the provided vector inside the specified MaxThrowAngle.
+    /// </summary>
+    /// <param name="direction">Vector to clamp.</param>
+    /// <returns>The clamped vector.</returns>
     private Vector3 ClampDirection(Vector3 direction)
     {
-        // Clamp solo en el plano horizontal ignorando Y
         Vector3 forwardFlat = Vector3.ProjectOnPlane(paperController.transform.forward, Vector3.up).normalized;
         Vector3 directionFlat = Vector3.ProjectOnPlane(direction, Vector3.up).normalized;
 
         float angle = Vector3.Angle(forwardFlat, directionFlat);
 
         if (angle > maxThrowAngle)
+        {
             direction = Vector3.RotateTowards(forwardFlat, directionFlat, maxThrowAngle * Mathf.Deg2Rad, 0f);
+        }
 
         direction.y += throwForceUpwards;
+
         return direction.normalized;
     }
 }

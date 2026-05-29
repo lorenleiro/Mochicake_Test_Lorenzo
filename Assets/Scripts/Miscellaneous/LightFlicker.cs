@@ -13,13 +13,16 @@ public class LightFlicker : MonoBehaviour
     private int minFlicks = 2;
 
     [SerializeField]
-    private int maxFlicks = 6;
+    private int maxFlicks = 8;
 
-    private Light light;
+    [SerializeField]
+    private Vector2 minMaxFlicksTime = new Vector2(0.03f, 0.1f);
+
+    private Light lightComponent;
 
     private void Awake()
     {
-        light = GetComponent<Light>();
+        lightComponent = GetComponent<Light>();
         StartCoroutine(Flicker());
     }
 
@@ -33,11 +36,12 @@ public class LightFlicker : MonoBehaviour
 
             for (int i = 0; i < flicks; i++)
             {
-                light.enabled = !light.enabled;
-                yield return new WaitForSeconds(Random.Range(0.03f, 0.1f));
+                lightComponent.enabled = !lightComponent.enabled;
+
+                yield return new WaitForSeconds(Random.Range(minMaxFlicksTime.x, minMaxFlicksTime.y));
             }
 
-            light.enabled = true;
+            lightComponent.enabled = true;
         }
     }
 }

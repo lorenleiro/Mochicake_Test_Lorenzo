@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FanController : MonoBehaviour
@@ -17,18 +15,22 @@ public class FanController : MonoBehaviour
     private Transform fanRightPosition;
 
     [SerializeField]
+    [Tooltip("Minimum force to apply to the paper mid-air.")]
     private float minWindForce;
 
     [SerializeField]
+    [Tooltip("Maximum force to apply to the paper mid-air.")]
     private float maxWindForce;
 
     [SerializeField]
     [Range(0.0f, 1.0f)]
+    [Tooltip("Scale of the calculated min-max force values.")]
     private float forceScale;
 
     private PaperController paper;
     private Vector3 windDirection;
     private float realForce;
+    private bool disabled;
 
     private void FixedUpdate()
     {
@@ -40,12 +42,37 @@ public class FanController : MonoBehaviour
         ApplyForces();
     }
 
+    /// <summary>
+    /// Sets the paper that will be pushed by this fan.
+    /// </summary>
+    /// <param name="paper">The paper that will be pushed.</param>
     public void SetPaper(PaperController paper)
     {
+        if (!fanGO.activeSelf)
+        {
+            fanGO.SetActive(true);
+        }
+
         this.paper = paper;
+        disabled = false;
+
         SetRandomWindForce();
     }
 
+    /// <summary>
+    /// Disables completely the fan, so the paper it's not influenced by it.
+    /// </summary>
+    public void Disable()
+    {
+        fanGO.SetActive(false);
+        realForce = 0.0f;
+        Direction = FanDirectionEnum.None;
+        disabled = true;
+    }
+
+    /// <summary>
+    /// Calculates a random wind force and direction.
+    /// </summary>
     private void SetRandomWindForce()
     {
         float randomDirection = Random.Range(0.0f, 1.0f);
@@ -75,7 +102,10 @@ public class FanController : MonoBehaviour
     /// </summary>
     private void ApplyForces()
     {
-        if (paper == null || !paper.Launched) return;
+        if (paper == null || !paper.Launched || disabled)
+        {
+            return;
+        }
 
         float launchSpeed = Vector3.Dot(paper.Body.velocity, paper.LaunchDirection);
 

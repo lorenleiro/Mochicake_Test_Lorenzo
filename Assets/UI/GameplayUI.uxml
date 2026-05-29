@@ -3,49 +3,56 @@
     <ui:VisualElement style="position: absolute; bottom: 1%; right: 2%; width: 100px; height: 100px; font-size: 50px; color: rgb(255, 255, 255); -unity-text-align: middle-center; justify-content: center; align-items: center; background-color: rgb(255, 142, 215); border-top-left-radius: 60px; border-top-right-radius: 60px; border-bottom-right-radius: 60px; border-bottom-left-radius: 60px;">
         <ui:Label tabindex="-1" text="1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="multiplier_text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(255, 0, 149); font-size: 70px; -unity-font-style: bold;" />
     </ui:VisualElement>
-    <ui:VisualElement style="height: 150px; width: 80%; align-self: center; background-color: rgb(255, 188, 60); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; top: -15px; justify-content: space-around; flex-direction: row; align-items: center; font-size: 50px; color: rgb(255, 255, 255); -unity-text-align: middle-center;">
-        <ui:VisualElement>
+    <ui:VisualElement style="height: 250px; width: 80%; align-self: center; background-color: rgb(255, 188, 60); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; top: -15px; justify-content: space-around; flex-direction: row; align-items: center; font-size: 50px; color: rgb(255, 255, 255); -unity-text-align: middle-center;">
+        <ui:VisualElement style="height: 150px;">
             <ui:Label tabindex="-1" text="Score" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 25px; -unity-font-style: bold;" />
             <ui:VisualElement class="score-container">
                 <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="score_text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement>
+        <ui:VisualElement style="height: 150px;">
             <ui:Label tabindex="-1" text="Best Score" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 25px; -unity-font-style: bold;" />
             <ui:VisualElement class="score-container">
                 <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="best_score_text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement>
+        <ui:VisualElement style="height: 150px;">
             <ui:Label tabindex="-1" text="Total Points" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 25px; -unity-font-style: bold;" />
             <ui:VisualElement class="score-container">
                 <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="total_points_text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement style="position: absolute; width: 80%; align-self: center; top: 20%; height: 50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; background-color: rgb(0, 64, 82); border-top-width: 6px; border-right-width: 6px; border-bottom-width: 6px; border-left-width: 6px; border-left-color: rgb(0, 36, 59); border-right-color: rgb(0, 36, 59); border-top-color: rgb(0, 36, 59); border-bottom-color: rgb(0, 36, 59);">
+    <ui:VisualElement style="position: absolute; width: 80%; align-self: center; top: 20%; height: 80px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; background-color: rgb(0, 64, 82); border-top-width: 6px; border-right-width: 6px; border-bottom-width: 6px; border-left-width: 6px; border-left-color: rgb(0, 36, 59); border-right-color: rgb(0, 36, 59); border-top-color: rgb(0, 36, 59); border-bottom-color: rgb(0, 36, 59);">
         <ui:VisualElement name="score_bar" class="progress-bar" />
     </ui:VisualElement>
     <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="settings_button" class="settings-button" />
+    <ui:VisualElement style="position: absolute; right: 1%; bottom: 10%; width: 150px; color: rgb(255, 255, 255); font-size: 30px;">
+        <ui:Button text="Bigger&#10;Trash" parse-escape-sequences="true" display-tooltip-when-elided="true" name="upgrade_trash_button" class="upgrade-trash-button" />
+        <ui:Button text="Disable&#10;Fan" parse-escape-sequences="true" display-tooltip-when-elided="true" name="disable_fan_button" class="disable-fan-button" style="margin-top: 20px;" />
+    </ui:VisualElement>
     <ui:VisualElement name="settings_container" class="settings-out">
-        <ui:VisualElement style="width: 70%; height: 40%; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; border-top-width: 6px; border-right-width: 6px; border-bottom-width: 6px; border-left-width: 6px; border-left-color: rgb(0, 36, 60); border-right-color: rgb(0, 36, 60); border-top-color: rgb(0, 36, 60); border-bottom-color: rgb(0, 36, 60); background-color: rgb(0, 113, 203); padding-top: 50px; padding-right: 20px; padding-bottom: 50px; padding-left: 20px; align-items: center; justify-content: space-between;">
+        <ui:VisualElement style="width: 70%; height: 30%; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; border-top-width: 6px; border-right-width: 6px; border-bottom-width: 6px; border-left-width: 6px; border-left-color: rgb(0, 36, 60); border-right-color: rgb(0, 36, 60); border-top-color: rgb(0, 36, 60); border-bottom-color: rgb(0, 36, 60); background-color: rgb(0, 113, 203); padding-top: 50px; padding-right: 20px; padding-bottom: 50px; padding-left: 20px; align-items: center; justify-content: space-between;">
             <ui:Label tabindex="-1" text="Game Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 25px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0); -unity-font-style: bold;" />
-            <ui:VisualElement style="width: 100%; font-size: 40px;">
-                <ui:Label tabindex="-1" text="Character Selector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            <ui:VisualElement style="width: 100%;">
+                <ui:VisualElement style="width: 100%; font-size: 40px;">
+                    <ui:Label tabindex="-1" text="Character Selector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-direction: row; align-items: center; width: 100%; justify-content: space-around; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; background-color: rgba(0, 0, 0, 0.2); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="change_skin_button" text="Change Skin" class="main-menu-button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 30px; width: 40%;" />
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement style="flex-direction: column; align-items: center; width: 100%; justify-content: center; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; background-color: rgba(0, 0, 0, 0.2); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
-                <ui:VisualElement name="skin_visual" style="width: 100px; height: 100px; background-image: resource(&apos;GraphView/Nodes/BlackboardFieldExposed&apos;);" />
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="change_skin_button" text="Change Skin" class="main-menu-button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 30px; width: 40%;" />
+            <ui:VisualElement style="width: 100%;">
+                <ui:VisualElement style="width: 100%; font-size: 40px;">
+                    <ui:Label tabindex="-1" text="Level Selector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-direction: row; align-items: center; width: 100%; justify-content: center; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; background-color: rgba(0, 0, 0, 0.2); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="previous_level_button" class="selection-button" style="background-image: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Editor/LookDev/Icons/d_LeftArrow@2x.png?fileID=2800000&amp;guid=90335e5423c010749a50f906b965fa54&amp;type=3#d_LeftArrow@2x&quot;);" />
+                    <ui:Label tabindex="-1" text="Normal Day" parse-escape-sequences="true" display-tooltip-when-elided="true" name="level_text" style="font-size: 50px;" />
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="next_level_button" class="selection-button" />
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement style="width: 100%; font-size: 40px;">
-                <ui:Label tabindex="-1" text="Level Selector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
-            </ui:VisualElement>
-            <ui:VisualElement style="flex-direction: row; align-items: center; width: 100%; justify-content: center; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; background-color: rgba(0, 0, 0, 0.2); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="previous_level_button" class="selection-button" style="background-image: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Editor/LookDev/Icons/d_LeftArrow@2x.png?fileID=2800000&amp;guid=90335e5423c010749a50f906b965fa54&amp;type=3#d_LeftArrow@2x&quot;);" />
-                <ui:Label tabindex="-1" text="Level 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="level_text" />
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="next_level_button" class="selection-button" />
-            </ui:VisualElement>
-            <ui:Button text="Close" parse-escape-sequences="true" display-tooltip-when-elided="true" name="close_settings" class="main-menu-button" />
+            <ui:Button text="Close" parse-escape-sequences="true" display-tooltip-when-elided="true" name="close_settings" class="main-menu-button" style="font-size: 30px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

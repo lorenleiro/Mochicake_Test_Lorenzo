@@ -33,6 +33,7 @@ public class GenericPool<T> : MonoBehaviour where T : Component
         T obj = pool.Get();
         obj.name = $"{prefab.name}-{spawnCount}";
         spawnCount++;
+
         return obj;
     }
 

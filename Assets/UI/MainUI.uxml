@@ -1,10 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="MainMenuUI" src="project://database/Assets/UI/MainMenuUI.uxml?fileID=9197481963319205126&amp;guid=cff78a0b0afbdae4c826c66eb584bf23&amp;type=3#MainMenuUI" />
     <ui:Template name="FanUI" src="project://database/Assets/UI/FanUI.uxml?fileID=9197481963319205126&amp;guid=98eef17fb8d3725499a168cf9cb4e47e&amp;type=3#FanUI" />
-    <ui:Template name="ScoreUI" src="project://database/Assets/UI/GameplayUI.uxml?fileID=9197481963319205126&amp;guid=09312564a37b2164d82c7d62069e9b24&amp;type=3#ScoreUI" />
+    <ui:Template name="ScoreUI" src="project://database/Assets/UI/GameplayUI.uxml?fileID=9197481963319205126&amp;guid=09312564a37b2164d82c7d62069e9b24&amp;type=3#GameplayUI" />
     <ui:VisualElement name="root" style="flex-grow: 1;">
         <ui:Instance template="MainMenuUI" name="MainMenuUI" style="position: absolute; width: 100%; height: 100%;" />
-        <ui:Instance template="FanUI" name="FanUI" style="position: absolute; align-self: center; bottom: 60%;" />
-        <ui:Instance template="ScoreUI" name="GameplayUI" style="position: absolute; width: 100%; height: 100%;" />
+        <ui:Instance template="FanUI" name="FanUI" style="position: absolute; align-self: center; bottom: 20%; display: none;" />
+        <ui:Instance template="ScoreUI" name="GameplayUI" style="position: absolute; width: 100%; height: 100%; display: none;" />
     </ui:VisualElement>
 </ui:UXML>

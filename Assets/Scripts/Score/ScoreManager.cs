@@ -1,17 +1,28 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour
 {
     public Action<ScoreManager> OnScoreUpdated { get; set; }
+    /// <summary>
+    /// Multiplier used when a new point is scored.
+    /// </summary>
     public int Multiplier { get; private set; } = 1;
+    /// <summary>
+    /// Live score without failures.
+    /// </summary>
     public int Score { get; private set; }
+    public int CurrentScore { get; private set; }
     public int BestScore { get; private set; }
+    /// <summary>
+    /// Points accumulated during all gameplay.
+    /// </summary>
     public int TotalPoints { get; private set; }
     public int RewardPoints { get; private set; }
     public int RewardMaxPoints { get { return scoreBarMaxPoints; } }
+
+    [Header("Multiplier")]
 
     [SerializeField]
     [Tooltip("When reaching a new multiplier, the next one is calculated based on this.")]
@@ -24,9 +35,13 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private int scoreBarMaxPoints = 6;
 
+    [Header("Reward Event")]
+
+    [SerializeField]
+    private UnityEvent rewardGranted;
+
     private const int BASE_SCORE = 1;
     private const int BASE_POINTS = 3;
-    private const int BASE_SCORE_MULTIPLIER = 3;
     private const int BASE_MULTIPLIER_STEP = 1;
     private float currentMultiplierProgress;
     private float nextMultiplierStep;
@@ -43,13 +58,18 @@ public class ScoreManager : MonoBehaviour
         GameManager.Instance.OnPaperFailScore -= ResetScore;
     }
 
+    /// <summary>
+    /// Updates the game score and calculates the current multiplier.
+    /// </summary>
     private void UpdateScore()
     {
         int scoredPoints = BASE_SCORE * Multiplier;
+        int points = scoredPoints * BASE_POINTS;
 
         RewardPoints++;
         Score += scoredPoints;
-        TotalPoints += scoredPoints * BASE_POINTS;
+        CurrentScore = points;
+        TotalPoints += points;
 
         if (Score > BestScore)
         {
@@ -66,6 +86,9 @@ public class ScoreManager : MonoBehaviour
         OnScoreUpdated?.Invoke(this);
     }
 
+    /// <summary>
+    /// Calculates the multiplier progress.
+    /// </summary>
     private void CalculateMultiplier()
     {
         currentMultiplierProgress += multiplierProgress;
@@ -78,8 +101,12 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets the score and multiplier.
+    /// </summary>
     private void ResetScore()
     {
+        CurrentScore = 0;
         Score = 0;
         Multiplier = 1;
         currentMultiplierProgress = 0.0f;
@@ -89,6 +116,6 @@ public class ScoreManager : MonoBehaviour
 
     private void GrantReward()
     {
-
+        rewardGranted?.Invoke();
     }
 }

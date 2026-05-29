@@ -4,15 +4,18 @@ using UnityEngine;
 public class PaperManager : MonoBehaviour
 {
     public Action<PaperController> OnPaperSpawned { get; set; }
-    public Action OnPaperScored{ get; set; }
-    public Action OnPaperFailScore{ get; set; }
+    public Action OnPaperScored { get; set; }
+    public Action OnPaperFailScore { get; set; }
     public PaperController CurrentPaper { get { return currentPaper; } }
+
+    [SerializeField]
+    private GameSettingsData gameSettingsData;
 
     [SerializeField]
     private PaperPool paperPool;
 
     [SerializeField]
-    private BinController binController;
+    private TrashController binController;
 
     [SerializeField]
     private FanController fanController;
@@ -22,6 +25,7 @@ public class PaperManager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnGameStart += RequestPaper;
+        gameSettingsData.OnPaperVisualChanged += ChangePaperVisual;
     }
 
     private void OnDestroy()
@@ -29,6 +33,9 @@ public class PaperManager : MonoBehaviour
         Dispose();
     }
 
+    /// <summary>
+    /// Request a new paper from the pool and initializes it.
+    /// </summary>
     private void RequestPaper()
     {
         if (currentPaper != null)
@@ -62,5 +69,17 @@ public class PaperManager : MonoBehaviour
         }
 
         GameManager.Instance.OnGameStart -= RequestPaper;
+        gameSettingsData.OnPaperVisualChanged -= ChangePaperVisual;
+    }
+
+    /// <summary>
+    /// Sets the new paper visual object.
+    /// </summary>
+    private void ChangePaperVisual()
+    {
+        if (currentPaper != null)
+        {
+            currentPaper.SetVisual(gameSettingsData.PaperVisuals[gameSettingsData.SelectedPaperVisual]);
+        }
     }
 }
