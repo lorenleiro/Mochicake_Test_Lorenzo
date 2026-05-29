@@ -7,7 +7,7 @@ public class GameSettingsData : ScriptableObject
     public Action OnLevelSelected { get; set; }
     public Action OnPaperVisualChanged { get; set; }
     public int SelectedLevel { get; private set; }
-    public int SelectedPaperVisual { get; private set; } = 1;
+    public int SelectedPaperVisual { get; private set; }
 
     public Vector3 Gravity = new Vector3(0.0f, -9.81f, 1.0f);
     public LevelData[] GameLevels;
